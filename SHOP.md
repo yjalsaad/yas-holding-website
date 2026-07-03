@@ -37,7 +37,7 @@ Supabase → **Authentication → Providers → Email**:
 - If you'd rather let people use the store immediately, turn **Confirm email OFF**.
 
 Also set **Authentication → URL Configuration → Site URL** to your deployed URL
-(e.g. `https://yas-holding.com`) so confirmation links point to the right place.
+so confirmation links point to the right place.
 
 ## Enabling online card payments
 

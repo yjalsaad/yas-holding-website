@@ -43,7 +43,7 @@ serve(async (req) => {
     //     amount, currency,
     //     customer: { email },
     //     source: { id: 'src_all' },
-    //     redirect: { url: `https://yas-holding.com/account?order=${order_id}` },
+    //     redirect: { url: `${Deno.env.get('SITE_URL')}/account?order=${order_id}` },
     //     reference: { order: order_id },
     //   }),
     // });

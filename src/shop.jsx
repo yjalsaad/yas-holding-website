@@ -34,7 +34,25 @@ export function Shop() {
   const { t, lang } = useI18n();
   const { add } = useCart();
   const [products, setProducts] = useState(null);
+  const [cat, setCat] = useState('');
+  const [q, setQ] = useState('');
   useEffect(() => { loadProducts().then((p) => setProducts(Array.isArray(p) ? p : [])).catch(() => setProducts([])); }, []);
+
+  const categories = useMemo(() => {
+    const set = new Set();
+    (products || []).forEach((p) => { if (p.category) set.add(p.category); });
+    return Array.from(set).sort();
+  }, [products]);
+  const shown = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    return (products || []).filter((p) =>
+      (!cat || p.category === cat) &&
+      (!s || (nm(p, lang, 'name') || '').toLowerCase().includes(s) || (p.sku || '').toLowerCase().includes(s))
+    );
+  }, [products, cat, q, lang]);
+
+  const chip = (active) => ({ padding: '8px 15px', borderRadius: 999, fontSize: 13.5, fontWeight: 600, cursor: 'pointer',
+    border: active ? '1px solid var(--brand)' : '1px solid var(--line)', background: active ? 'rgba(168,121,43,.10)' : 'var(--white)', color: active ? 'var(--brand-deep)' : 'var(--ink-soft)' });
 
   return (
     <>
@@ -42,9 +60,19 @@ export function Shop() {
       <section className="section">
         <div className="wrap">
           <div className="sec-head rv"><span className="eyebrow">{t('shop.products.eyebrow')}</span><h2 className="serif">{t('shop.products.title')}</h2></div>
+
+          <div className="rv" style={{ display: 'flex', gap: 14, alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', marginBottom: 24 }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <button onClick={() => setCat('')} style={chip(!cat)}>{t('shop.all')}</button>
+              {categories.map((c) => <button key={c} onClick={() => setCat(c)} style={chip(cat === c)}>{c}</button>)}
+            </div>
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('shop.search')} style={{ maxWidth: 260, border: '1.5px solid transparent', background: '#f3ede4', borderRadius: 12, padding: '11px 15px', fontSize: 15, color: 'var(--ink)', fontFamily: 'inherit' }} />
+          </div>
+
           {products === null && <p className="lead">…</p>}
+          {products && shown.length === 0 && <p className="lead" style={{ color: 'var(--muted)' }}>{t('shop.nomatch')}</p>}
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px,1fr))' }}>
-            {products && products.map((p) => (
+            {shown.map((p) => (
               <div className="swatch rv" key={p.id}>
                 <Link to={'/shop/' + p.id} className="swatch-img" style={{ display: 'block' }}>
                   {p.image_url ? <img src={p.image_url} alt={nm(p, lang, 'name')} loading="lazy" /> : null}

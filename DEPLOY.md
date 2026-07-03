@@ -42,9 +42,9 @@ git push -u origin main
 
 ### d. Point the domain
 
-In the Vercel project → **Settings → Domains** → add `yas-holding.com` (and `www.yas-holding.com`). Vercel shows the DNS records to set at your registrar (an `A` / `CNAME`). Once DNS propagates, the site is live on your domain.
+In the Vercel project → **Settings → Domains** → add your production domain (and its `www.` variant). Vercel shows the DNS records to set at your registrar (an `A` / `CNAME`). Once DNS propagates, the site is live on your domain.
 
-> Note: `yas-holding.com` currently points at the old site. Adding the domain in Vercel and updating DNS is what switches it over — do this when you're ready to go live.
+> Adding the domain in Vercel and updating DNS is what switches it over — do this when you're ready to go live.
 
 ---
 

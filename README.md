@@ -72,7 +72,7 @@ This is a self-contained repo. To ship it:
    ```
 2. Create a **new Vercel project** from that repo. Vercel auto-detects Vite;
    `vercel.json` sets the SPA rewrite so deep links / refresh work.
-3. Point `yas-holding.com` DNS at the new Vercel project.
+3. Point your production domain's DNS at the new Vercel project.
 
 No environment variables are required — the Supabase URL and public anon key are
 embedded (safe for the browser; RLS governs access).
