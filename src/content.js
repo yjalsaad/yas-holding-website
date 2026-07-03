@@ -1,0 +1,178 @@
+// ── Built-in bilingual content (fallbacks) ────────────────────────────────
+// Every key here can be overridden by a matching row in yas_site_content
+// (columns: key, en, ar) edited from the Bonsai Hub. The site paints these
+// fallbacks instantly, then silently upgrades to Hub-managed copy on load.
+export const FALLBACKS = {
+  // Brand / chrome
+  'brand.name':      { en: 'YAS Holding', ar: 'يس القابضة' },
+  'brand.tagline':   { en: 'Crafting Excellence', ar: 'نصنع التميّز' },
+  'nav.home':        { en: 'Home', ar: 'الرئيسية' },
+  'nav.about':       { en: 'About', ar: 'من نحن' },
+  'nav.brands':      { en: 'Brands', ar: 'علاماتنا' },
+  'nav.careers':     { en: 'Careers', ar: 'الوظائف' },
+  'nav.contact':     { en: 'Contact', ar: 'تواصل معنا' },
+  'cta.explore':     { en: 'Explore our brands', ar: 'استكشف علاماتنا' },
+  'cta.contact':     { en: 'Get in touch', ar: 'تواصل معنا' },
+  'cta.learnmore':   { en: 'Learn more', ar: 'اعرف المزيد' },
+
+  // Home — hero
+  'home.hero.eyebrow':  { en: 'Bahrain-based group · Est. 2012', ar: 'مجموعة بحرينية · تأسست 2012' },
+  'home.hero.title':    { en: 'A holding company built on craft.', ar: 'شركة قابضة قامت على الحرفة.' },
+  'home.hero.subtitle': { en: 'YAS Holding brings together premium wood manufacturing and custom furniture craftsmanship under one group — delivering excellence to clients across 15 countries.', ar: 'تجمع يس القابضة بين تصنيع الأخشاب الفاخرة وحرفية الأثاث المُصمّم خصيصاً تحت مظلة واحدة — نقدّم التميّز لعملائنا في 15 دولة.' },
+  'home.stat1.n':   { en: '2012', ar: '2012' },
+  'home.stat1.l':   { en: 'Established', ar: 'سنة التأسيس' },
+  'home.stat2.n':   { en: '15+', ar: '+15' },
+  'home.stat2.l':   { en: 'Countries served', ar: 'دولة نخدمها' },
+  'home.stat3.n':   { en: '200+', ar: '+200' },
+  'home.stat4.n':   { en: 'ISO 9001', ar: 'أيزو 9001' },
+  'home.stat3.l':   { en: 'People across the group', ar: 'موظف في المجموعة' },
+  'home.stat4.l':   { en: 'Quality certified', ar: 'معتمدون للجودة' },
+
+  // Home — subsidiaries
+  'home.subs.eyebrow': { en: 'Our subsidiaries', ar: 'شركاتنا' },
+  'home.subs.title':   { en: 'Two brands, one standard.', ar: 'علامتان، ومعيار واحد.' },
+  'home.subs.sub':     { en: 'Each company in the group is a specialist in its field, united by a shared commitment to quality, sustainability and craftsmanship.', ar: 'كل شركة في المجموعة متخصصة في مجالها، تجمعنا التزام مشترك بالجودة والاستدامة والحرفية.' },
+
+  // Home — commitment
+  'home.commit.eyebrow': { en: 'Our commitment', ar: 'التزامنا' },
+  'home.commit.title':   { en: 'The principles behind every piece.', ar: 'المبادئ خلف كل قطعة.' },
+  'home.commit.1.t': { en: 'Sustainable', ar: 'الاستدامة' },
+  'home.commit.1.d': { en: 'Responsibly sourced materials and eco-conscious processes for a better tomorrow.', ar: 'مواد من مصادر مسؤولة وعمليات صديقة للبيئة من أجل غدٍ أفضل.' },
+  'home.commit.2.t': { en: 'Custom Design', ar: 'التصميم المخصّص' },
+  'home.commit.2.d': { en: 'Tailored solutions engineered to fit each client, space and specification.', ar: 'حلول مصمّمة خصيصاً لتناسب كل عميل ومساحة ومواصفات.' },
+  'home.commit.3.t': { en: 'Quality Craftsmanship', ar: 'حرفية الجودة' },
+  'home.commit.3.d': { en: 'ISO 9001:2015 processes and expert artisans behind every finished product.', ar: 'عمليات مطابقة لأيزو 9001:2015 وحرفيون خبراء خلف كل منتج.' },
+
+  // Home — group band
+  'home.band.title': { en: 'One group. End-to-end capability.', ar: 'مجموعة واحدة. قدرة متكاملة.' },
+  'home.band.sub':   { en: 'From raw material to finished, installed furniture — the YAS Holding group owns the full value chain.', ar: 'من المادة الخام إلى الأثاث المُركّب — تمتلك مجموعة يس القابضة سلسلة القيمة الكاملة.' },
+
+  // About
+  'about.hero.eyebrow': { en: 'About the group', ar: 'عن المجموعة' },
+  'about.hero.title':   { en: 'Excellence, from forest to finish.', ar: 'التميّز، من الغابة إلى التشطيب.' },
+  'about.hero.sub':     { en: 'Founded in 2012 and headquartered in the Kingdom of Bahrain, YAS Holding is a family of specialist companies in wood and furniture manufacturing.', ar: 'تأسست عام 2012 ومقرها مملكة البحرين، يس القابضة عائلة من الشركات المتخصصة في تصنيع الأخشاب والأثاث.' },
+  'about.story.title':  { en: 'Our story', ar: 'قصتنا' },
+  'about.story.p1':     { en: 'YAS Holding began with a simple conviction: that standardised processes, regulatory compliance and genuine craftsmanship are the cornerstones of lasting success. From a single wood factory in Bahrain, the group has grown into a multi-company operation serving clients across the Gulf and beyond.', ar: 'بدأت يس القابضة بقناعة بسيطة: أن العمليات المُوحّدة والامتثال التنظيمي والحرفية الحقيقية هي أسس النجاح الدائم. من مصنع أخشاب واحد في البحرين، نمت المجموعة إلى عملية متعددة الشركات تخدم العملاء في الخليج وخارجه.' },
+  'about.story.p2':     { en: 'Today, through YAS Wood and The Closets International, we design, manufacture, deliver and install — owning the full value chain and holding every stage to the same exacting standard.', ar: 'اليوم، من خلال يس وود وذا كلوزتس إنترناشونال، نصمّم ونصنّع ونسلّم ونركّب — نمتلك سلسلة القيمة الكاملة ونحافظ على المعيار نفسه في كل مرحلة.' },
+  'about.mv.mission.t': { en: 'Mission', ar: 'رسالتنا' },
+  'about.mv.mission.d': { en: 'To deliver high-quality wood and furniture products through standardised, compliant and efficient processes that earn the trust of our clients and partners.', ar: 'تقديم منتجات أخشاب وأثاث عالية الجودة عبر عمليات موحّدة ومتوافقة وفعّالة تكسب ثقة عملائنا وشركائنا.' },
+  'about.mv.vision.t':  { en: 'Vision', ar: 'رؤيتنا' },
+  'about.mv.vision.d':  { en: 'To be the region’s benchmark group for premium wood and bespoke furniture — recognised for craftsmanship, reliability and responsible growth.', ar: 'أن نكون المجموعة المرجعية في المنطقة للأخشاب الفاخرة والأثاث المُصمّم — معروفين بالحرفية والموثوقية والنمو المسؤول.' },
+  'about.values.title': { en: 'What we stand for', ar: 'ما نؤمن به' },
+  'about.iso.eyebrow':  { en: 'Quality management', ar: 'إدارة الجودة' },
+  'about.iso.title':    { en: 'ISO 9001:2015 certified.', ar: 'معتمدون وفق أيزو 9001:2015.' },
+  'about.iso.p':        { en: 'Our operations are governed by documented policies, key responsibility areas and measurable performance indicators. Standardised work instructions, forms and flowcharts ensure every task is performed consistently — from a sales enquiry to final delivery.', ar: 'تُدار عملياتنا بسياسات موثّقة ومجالات مسؤولية رئيسية ومؤشرات أداء قابلة للقياس. تضمن تعليمات العمل والنماذج والمخططات الموحّدة أداء كل مهمة باتساق — من الاستفسار البيعي إلى التسليم النهائي.' },
+  'about.leader.eyebrow': { en: 'Leadership', ar: 'القيادة' },
+  'about.leader.name':  { en: 'Ali Alhaddad', ar: 'علي الحداد' },
+  'about.leader.role':  { en: 'Managing Director', ar: 'العضو المنتدب' },
+  'about.leader.quote': { en: '“We build companies the way we build furniture — measured, honest and made to last.”', ar: '«نبني الشركات كما نصنع الأثاث — بدقّة وصدق وصُنعٍ يدوم.»' },
+
+  // Brands — YAS Wood
+  'ywood.hero.eyebrow': { en: 'A YAS Holding company', ar: 'شركة من يس القابضة' },
+  'ywood.hero.title':   { en: 'YAS Wood', ar: 'يس وود' },
+  'ywood.hero.sub':     { en: 'Premium wood materials and manufacturing — supplying the region with quality panels, boards and bespoke joinery, produced to ISO 9001:2015 standards.', ar: 'مواد أخشاب فاخرة وتصنيع — نزوّد المنطقة بألواح وأخشاب ونجارة مخصّصة عالية الجودة، مُنتجة وفق معايير أيزو 9001:2015.' },
+  'ywood.body.title':   { en: 'Manufacturing, standardised.', ar: 'تصنيع مُوحّد المعايير.' },
+  'ywood.body.p':       { en: 'YAS Wood operates a dedicated factory in Bahrain, producing melamine panels, boards, wood samples and custom orders for local and international clients. Every order flows through a documented process — from quotation and sales order to production, dispatch and delivery — tracked end to end.', ar: 'تدير يس وود مصنعاً مخصصاً في البحرين، لإنتاج ألواح الميلامين والأخشاب وعيّنات الخشب والطلبات المخصّصة للعملاء المحليين والدوليين. يمرّ كل طلب عبر عملية موثّقة — من عرض السعر وأمر البيع إلى الإنتاج والشحن والتسليم — بتتبّع كامل.' },
+  'ywood.f1.t': { en: 'Panels & boards', ar: 'الألواح والأخشاب' },
+  'ywood.f1.d': { en: 'Melamine panels and engineered boards in a wide range of colours and finishes.', ar: 'ألواح ميلامين وأخشاب هندسية بمجموعة واسعة من الألوان والتشطيبات.' },
+  'ywood.f2.t': { en: 'Bespoke joinery', ar: 'نجارة مخصّصة' },
+  'ywood.f2.d': { en: 'Made-to-order components manufactured to precise client specifications.', ar: 'مكوّنات تُصنع حسب الطلب وفق مواصفات دقيقة للعميل.' },
+  'ywood.f3.t': { en: 'Export-ready', ar: 'جاهز للتصدير' },
+  'ywood.f3.d': { en: 'CFR and door-to-door delivery with full export documentation.', ar: 'تسليم CFR ومن الباب إلى الباب مع وثائق تصدير كاملة.' },
+
+  // Brands — The Closets International
+  'closets.hero.eyebrow': { en: 'A YAS Holding company', ar: 'شركة من يس القابضة' },
+  'closets.hero.title':   { en: 'The Closets International', ar: 'ذا كلوزتس إنترناشونال' },
+  'closets.hero.sub':     { en: 'One of the region’s leading closets and kitchens manufacturers — bespoke wardrobes, kitchens and storage, designed, built and installed across Bahrain, Saudi Arabia and the UAE.', ar: 'أحد أبرز مصنّعي الخزائن والمطابخ في المنطقة — خزائن ومطابخ وحلول تخزين مخصّصة، تُصمّم وتُصنّع وتُركّب في البحرين والسعودية والإمارات.' },
+  'closets.body.title':   { en: 'Bespoke furniture, at scale.', ar: 'أثاث مخصّص، على نطاق واسع.' },
+  'closets.body.p':       { en: 'With a team of more than 200 across the Gulf, The Closets International brings the group’s craftsmanship directly to homes — from free design consultations and 3D planning to in-house manufacturing and professional installation.', ar: 'بفريق يزيد عن 200 شخص في الخليج، تنقل ذا كلوزتس إنترناشونال حرفية المجموعة مباشرة إلى المنازل — من استشارات التصميم المجانية والتخطيط ثلاثي الأبعاد إلى التصنيع الداخلي والتركيب الاحترافي.' },
+  'closets.cta':          { en: 'Visit The Closets website', ar: 'زر موقع ذا كلوزتس' },
+
+  // Brands — Fittings House
+  'fittings.hero.eyebrow': { en: 'A YAS Holding company', ar: 'شركة من يس القابضة' },
+  'fittings.hero.title':   { en: 'Fittings House', ar: 'فيتنغز هاوس' },
+  'fittings.hero.sub':     { en: 'Quality vanities, accessories and furniture fittings — supplying the Middle East market with hardware and materials that fit every need and every space.', ar: 'وحدات أحواض وإكسسوارات ومستلزمات أثاث عالية الجودة — نزوّد سوق الشرق الأوسط بالمواد والإكسسوارات التي تناسب كل حاجة وكل مساحة.' },
+  'fittings.body.title':   { en: 'The details that finish a space.', ar: 'التفاصيل التي تُكمل المساحة.' },
+  'fittings.body.p':       { en: 'Fittings House specialises in the components that bring furniture to life — bespoke vanities, handles, hinges, drawer systems and finishing hardware. As part of YAS Holding, it supplies both the group’s own factories and the wider furnishings trade across the region.', ar: 'تتخصص فيتنغز هاوس في المكوّنات التي تمنح الأثاث الحياة — وحدات أحواض مخصّصة ومقابض ومفصّلات وأنظمة أدراج وإكسسوارات تشطيب. وكجزء من يس القابضة، تزوّد مصانع المجموعة وقطاع الأثاث في المنطقة.' },
+  'fittings.f1.t': { en: 'Vanities', ar: 'وحدات الأحواض' },
+  'fittings.f1.d': { en: 'Customised bathroom vanities built to size, finish and budget.', ar: 'وحدات أحواض حمّام مخصّصة حسب المقاس والتشطيب والميزانية.' },
+  'fittings.f2.t': { en: 'Fittings & hardware', ar: 'الإكسسوارات والمستلزمات' },
+  'fittings.f2.d': { en: 'Handles, hinges, runners and drawer systems from trusted brands.', ar: 'مقابض ومفصّلات ومجاري وأنظمة أدراج من علامات موثوقة.' },
+  'fittings.f3.t': { en: 'Trade supply', ar: 'التوريد للتجارة' },
+  'fittings.f3.d': { en: 'Reliable wholesale supply to the regional furnishings industry.', ar: 'توريد بالجملة موثوق لقطاع الأثاث الإقليمي.' },
+
+  // Quality — ISO 9001:2015
+  'nav.quality':          { en: 'Quality', ar: 'الجودة' },
+  'quality.hero.eyebrow': { en: 'ISO 9001:2015', ar: 'أيزو 9001:2015' },
+  'quality.hero.title':   { en: 'Quality is a process, not a promise.', ar: 'الجودة عملية، لا وعد.' },
+  'quality.hero.sub':     { en: 'Robust policy, process standardisation and regulatory compliance are the cornerstones of how we work — so we deliver consistent quality, efficiency and safety on every order.', ar: 'السياسات المتينة وتوحيد العمليات والامتثال التنظيمي هي أسس عملنا — لنقدّم جودة وكفاءة وسلامة ثابتة في كل طلب.' },
+  'quality.intro.title':  { en: 'Standardised by design', ar: 'موحّد بالتصميم' },
+  'quality.intro.p':      { en: 'By standardising our processes we remove redundancy, strengthen quality control and streamline operations — improving productivity and customer satisfaction. Compliance with industry regulations safeguards our reputation and builds trust with clients and partners alike.', ar: 'بتوحيد عملياتنا نزيل التكرار ونعزّز ضبط الجودة ونبسّط العمليات — بما يرفع الإنتاجية ورضا العملاء. والامتثال للأنظمة يحمي سمعتنا ويبني الثقة مع العملاء والشركاء.' },
+  'quality.pillars.title':{ en: 'How the system works', ar: 'كيف يعمل النظام' },
+  'quality.p1.t': { en: 'Company policy', ar: 'سياسة الشركة' },
+  'quality.p1.d': { en: 'Clear, documented policies define how every department operates.', ar: 'سياسات واضحة وموثّقة تحدّد كيفية عمل كل قسم.' },
+  'quality.p2.t': { en: 'Work instructions', ar: 'تعليمات العمل' },
+  'quality.p2.d': { en: 'Step-by-step guidelines so every task is performed the same way.', ar: 'إرشادات خطوة بخطوة لأداء كل مهمة بالطريقة نفسها.' },
+  'quality.p3.t': { en: 'Responsibility areas (KRA)', ar: 'مجالات المسؤولية (KRA)' },
+  'quality.p3.d': { en: 'Each role’s duties are defined, for accountability and clarity.', ar: 'تُحدَّد واجبات كل دور لضمان المساءلة والوضوح.' },
+  'quality.p4.t': { en: 'Performance indicators (KPI)', ar: 'مؤشرات الأداء (KPI)' },
+  'quality.p4.d': { en: 'Measurable targets that let us monitor and continuously improve.', ar: 'أهداف قابلة للقياس تتيح المتابعة والتحسين المستمر.' },
+  'quality.tools.title':  { en: 'The tools behind the standard', ar: 'الأدوات خلف المعيار' },
+  'quality.tools.sub':    { en: 'A comprehensive set of forms, templates, data trackers and flowcharts documents every stage — from initial planning to final execution.', ar: 'مجموعة شاملة من النماذج والقوالب ومتتبّعات البيانات والمخططات توثّق كل مرحلة — من التخطيط الأولي إلى التنفيذ النهائي.' },
+  'quality.tool1.t': { en: 'Forms & templates', ar: 'النماذج والقوالب' },
+  'quality.tool1.d': { en: 'A consistent format for recording information accurately across departments.', ar: 'صيغة موحّدة لتسجيل المعلومات بدقة عبر جميع الأقسام.' },
+  'quality.tool2.t': { en: 'Data trackers', ar: 'متتبّعات البيانات' },
+  'quality.tool2.d': { en: 'Progress and performance metrics that drive informed decisions.', ar: 'مقاييس التقدّم والأداء التي تقود قرارات مدروسة.' },
+  'quality.tool3.t': { en: 'Flowcharts', ar: 'مخططات سير العمل' },
+  'quality.tool3.d': { en: 'Visual maps of each workflow so every step is easy to follow.', ar: 'خرائط بصرية لكل سير عمل تجعل كل خطوة سهلة المتابعة.' },
+  'quality.cert.title':   { en: 'Certified to ISO 9001:2015', ar: 'معتمدون وفق أيزو 9001:2015' },
+  'quality.cert.p':       { en: 'Our quality management system is certified to the international ISO 9001:2015 standard — independently assessed and continually audited.', ar: 'نظام إدارة الجودة لدينا معتمد وفق المعيار الدولي أيزو 9001:2015 — مُقيَّم بشكل مستقل ومُدقَّق باستمرار.' },
+
+  // Careers
+  'careers.hero.eyebrow': { en: 'Careers', ar: 'الوظائف' },
+  'careers.hero.title':   { en: 'Build your career with the group.', ar: 'ابنِ مسيرتك مع المجموعة.' },
+  'careers.hero.sub':     { en: 'We’re always looking for people who take pride in doing things properly. Explore open roles across YAS Holding and its companies.', ar: 'نبحث دائماً عن أشخاص يفخرون بإتقان العمل. استكشف الوظائف المتاحة في يس القابضة وشركاتها.' },
+  'careers.open.title':   { en: 'Open positions', ar: 'الوظائف المتاحة' },
+  'careers.empty':        { en: 'No open positions right now — but we’d still like to hear from you. Send your CV to careers@yas-holding.com.', ar: 'لا توجد وظائف متاحة حالياً — لكن يسعدنا أن نسمع منك. أرسل سيرتك إلى careers@yas-holding.com.' },
+  'careers.apply':        { en: 'Apply', ar: 'تقديم' },
+
+  // Contact
+  'contact.hero.eyebrow': { en: 'Contact', ar: 'تواصل معنا' },
+  'contact.hero.title':   { en: 'Let’s talk.', ar: 'لنتحدّث.' },
+  'contact.hero.sub':     { en: 'Whether you’re a client, partner or supplier, our team is here to help.', ar: 'سواء كنت عميلاً أو شريكاً أو مورّداً، فريقنا هنا لمساعدتك.' },
+  'contact.info.title':   { en: 'Head office', ar: 'المكتب الرئيسي' },
+  'contact.addr.k':       { en: 'Address', ar: 'العنوان' },
+  'contact.addr.v':       { en: 'Road 5136, Building 1338G, Askar, Kingdom of Bahrain', ar: 'طريق 5136، مبنى 1338G، عسكر، مملكة البحرين' },
+  'contact.phone.k':      { en: 'Phone', ar: 'الهاتف' },
+  'contact.email.k':      { en: 'Email', ar: 'البريد الإلكتروني' },
+  'contact.hours.k':      { en: 'Hours', ar: 'ساعات العمل' },
+  'contact.hours.v':      { en: 'Sunday – Thursday, 8:00am – 5:00pm', ar: 'الأحد – الخميس، 8:00ص – 5:00م' },
+  'contact.form.title':   { en: 'Send us a message', ar: 'أرسل لنا رسالة' },
+  'contact.form.name':    { en: 'Full name', ar: 'الاسم الكامل' },
+  'contact.form.email':   { en: 'Email', ar: 'البريد الإلكتروني' },
+  'contact.form.phone':   { en: 'Phone', ar: 'الهاتف' },
+  'contact.form.subject': { en: 'Subject', ar: 'الموضوع' },
+  'contact.form.message': { en: 'Message', ar: 'الرسالة' },
+  'contact.form.send':    { en: 'Send message', ar: 'إرسال' },
+  'contact.form.sending': { en: 'Sending…', ar: 'جارٍ الإرسال…' },
+  'contact.form.ok':      { en: 'Thank you — your message has been received. We’ll be in touch shortly.', ar: 'شكراً لك — تم استلام رسالتك وسنتواصل معك قريباً.' },
+  'contact.form.err':     { en: 'Sorry, something went wrong. Please try again or email us directly.', ar: 'عذراً، حدث خطأ ما. حاول مجدداً أو راسلنا مباشرة.' },
+
+  // Footer
+  'footer.blurb':   { en: 'A Bahrain-based group crafting excellence in premium wood and custom furniture through its specialist companies.', ar: 'مجموعة بحرينية تصنع التميّز في الأخشاب الفاخرة والأثاث المخصّص من خلال شركاتها المتخصصة.' },
+  'footer.quick':   { en: 'Quick links', ar: 'روابط سريعة' },
+  'footer.brands':  { en: 'Our brands', ar: 'علاماتنا' },
+  'footer.contact': { en: 'Contact', ar: 'تواصل' },
+  'footer.rights':  { en: '© 2026 YAS Holding. All rights reserved.', ar: '© 2026 يس القابضة. جميع الحقوق محفوظة.' },
+};
+
+// Static company facts (not Hub-managed — structural).
+export const CONTACT = {
+  phone: '+973 17 555 095',
+  phoneHref: '+97317555095',
+  email: 'info@yas-holding.com',
+  instagram: 'https://www.instagram.com/theclosets',
+  facebook: 'https://www.facebook.com/TheClosets/',
+  linkedin: 'https://www.linkedin.com/company/yas-holding/',
+  closetsSite: 'https://closets-website.vercel.app/',
+};

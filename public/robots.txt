@@ -1,0 +1,5 @@
+# YAS Holding
+User-agent: *
+Allow: /
+
+Sitemap: https://yas-holding.com/sitemap.xml
