@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Routes, Route, Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FALLBACKS, CONTACT } from './content.js';
+import { COLLECTION } from './collection.js';
 import { loadSiteContent, loadJobs, loadBrands, submitLead } from './supa.js';
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -115,6 +116,7 @@ function Header() {
               </div>
             )}
           </div>
+          <NavLink to="/collection" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.collection')}</NavLink>
           <NavLink to="/quality" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.quality')}</NavLink>
           <NavLink to="/careers" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.careers')}</NavLink>
           <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.contact')}</NavLink>
@@ -136,6 +138,7 @@ function Header() {
         <Link to="/brands/yas-wood">{t('ywood.hero.title')}</Link>
         <Link to="/brands/the-closets-international">{t('closets.hero.title')}</Link>
         <Link to="/brands/fittings-house">{t('fittings.hero.title')}</Link>
+        <Link to="/collection">{t('nav.collection')}</Link>
         <Link to="/quality">{t('nav.quality')}</Link>
         <Link to="/careers">{t('nav.careers')}</Link>
         <Link to="/contact">{t('nav.contact')}</Link>
@@ -175,6 +178,7 @@ function Footer() {
             <Link to="/brands/yas-wood">{t('ywood.hero.title')}</Link>
             <Link to="/brands/the-closets-international">{t('closets.hero.title')}</Link>
             <Link to="/brands/fittings-house">{t('fittings.hero.title')}</Link>
+            <Link to="/collection">{t('collection.hero.title')}</Link>
             <Link to="/quality">{t('nav.quality')}</Link>
           </div>
           <div>
@@ -456,6 +460,37 @@ function Quality() {
   );
 }
 
+function Collection() {
+  const { t } = useI18n();
+  useReveal();
+  return (
+    <>
+      <PageHero eyebrow={t('collection.hero.eyebrow')} title={t('collection.hero.title')} sub={t('collection.hero.sub')} />
+      <section className="section">
+        <div className="wrap">
+          <div className="rv" style={{ marginBottom: 26, color: 'var(--muted)', fontSize: 14, fontWeight: 600, letterSpacing: '.02em' }}>
+            {COLLECTION.length} {t('collection.count')}
+          </div>
+          <div className="swatch-grid">
+            {COLLECTION.map((sw, i) => (
+              <div className="swatch rv" key={sw.name + sw.code + i}>
+                <div className="swatch-img"><img src={sw.img} alt={sw.name} loading="lazy" /></div>
+                <div className="swatch-meta">
+                  <div className="swatch-name serif">{sw.name}</div>
+                  {sw.code && <div className="swatch-code">{sw.code}</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap"><div className="band rv"><h2 className="serif">{t('home.band.title')}</h2><p>{t('home.band.sub')}</p><Link to="/contact" className="btn btn-gold">{t('collection.cta')} <I.arrow /></Link></div></div>
+      </section>
+    </>
+  );
+}
+
 function Careers() {
   const { t, lang } = useI18n();
   useReveal();
@@ -580,6 +615,8 @@ const TITLES = {
   '/brands/the-closets-international': 'The Closets International — YAS Holding',
   '/brands/fittings-house': 'Fittings House — YAS Holding',
   '/quality': 'Quality & ISO 9001 — YAS Holding',
+  '/collection': 'Collection 2023–2025 — YAS Holding',
+  '/samples/collection2023-2025': 'Collection 2023–2025 — YAS Holding',
   '/careers': 'Careers — YAS Holding',
   '/contact': 'Contact — YAS Holding',
 };
@@ -606,6 +643,8 @@ export default function App() {
           <Route path="/brands/the-closets-international" element={<BrandPage prefix="closets" glyph="C" ctaHref={CONTACT.closetsSite} ctaKey="closets.cta" />} />
           <Route path="/brands/fittings-house" element={<BrandPage prefix="fittings" glyph="F" features={['f1', 'f2', 'f3']} />} />
           <Route path="/quality" element={<Quality />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/samples/collection2023-2025" element={<Collection />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

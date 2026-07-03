@@ -101,6 +101,14 @@ export const FALLBACKS = {
   'fittings.f3.t': { en: 'Trade supply', ar: 'التوريد للتجارة' },
   'fittings.f3.d': { en: 'Reliable wholesale supply to the regional furnishings industry.', ar: 'توريد بالجملة موثوق لقطاع الأثاث الإقليمي.' },
 
+  // Collection 2023–2025 (YAS Wood finish samples)
+  'nav.collection':        { en: 'Collection', ar: 'المجموعة' },
+  'collection.hero.eyebrow': { en: 'YAS Wood · Finishes', ar: 'يس وود · التشطيبات' },
+  'collection.hero.title':   { en: 'Collection 2023–2025', ar: 'مجموعة 2023–2025' },
+  'collection.hero.sub':     { en: 'Our curated range of wood, stone and solid melamine finishes — the surfaces behind every YAS Wood project. Reference codes are shown for specification.', ar: 'مجموعتنا المختارة من تشطيبات الخشب والحجر والميلامين الصلب — الأسطح خلف كل مشروع ليس وود. تُعرض رموز المرجع للمواصفات.' },
+  'collection.count':        { en: 'finishes in this collection', ar: 'تشطيباً في هذه المجموعة' },
+  'collection.cta':          { en: 'Request samples', ar: 'اطلب عيّنات' },
+
   // Quality — ISO 9001:2015
   'nav.quality':          { en: 'Quality', ar: 'الجودة' },
   'quality.hero.eyebrow': { en: 'ISO 9001:2015', ar: 'أيزو 9001:2015' },
