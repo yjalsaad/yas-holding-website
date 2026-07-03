@@ -3,8 +3,8 @@
 // content the Hub manages (yas_site_content, yas_brands, yas_jobs) and writes
 // contact enquiries (yas_leads). The anon key is a public client key — safe to
 // ship in the browser; row-level security governs what anon can read/write.
-const SUPA_URL = 'https://jflmbfxbhpioyniibjsj.supabase.co';
-const SUPA_KEY =
+export const SUPA_URL = 'https://jflmbfxbhpioyniibjsj.supabase.co';
+export const SUPA_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmbG1iZnhiaHBpb3luaWlianNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NjkyNjQsImV4cCI6MjA5MDQ0NTI2NH0.XnQHF1Ivzhv6Zj12qe1Gh2x6ZyLdFfmUBweE_5SZnu0';
 
 const H = {
@@ -59,5 +59,57 @@ export async function submitLead(lead) {
     method: 'POST',
     headers: { Prefer: 'return=minimal' },
     body: [lead],
+  });
+}
+
+// ── Shop / account ────────────────────────────────────────────────────────
+// Authenticated REST call: uses the logged-in customer's access token as bearer
+// (so RLS policies keyed on auth.uid() apply). `apikey` stays the anon key.
+export async function authedApi(path, token, opts = {}) {
+  const headers = {
+    apikey: SUPA_KEY,
+    Authorization: 'Bearer ' + (token || SUPA_KEY),
+    'Content-Type': 'application/json',
+    ...(opts.headers || {}),
+  };
+  const r = await fetch(SUPA_URL + '/rest/v1/' + path, {
+    ...opts, headers, body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (!r.ok) {
+    let msg = 'request failed (' + r.status + ')';
+    try { const e = await r.json(); msg = e.message || e.hint || e.details || msg; } catch (_) {}
+    throw new Error(msg);
+  }
+  if (r.status === 204) return true;
+  try { return await r.json(); } catch (_) { return true; }
+}
+
+export async function loadProducts() {
+  return api('yas_products?select=*&active=eq.true&order=sort.asc,created_at.desc');
+}
+
+// Place an order/quote. Works for guests (anon) and logged-in customers (token).
+export async function placeOrder(order, token) {
+  return authedApi('yas_orders', token, {
+    method: 'POST',
+    headers: { Prefer: 'return=representation' },
+    body: [order],
+  });
+}
+
+export async function loadMyOrders(token) {
+  return authedApi('yas_orders?select=*&order=created_at.desc', token);
+}
+
+export async function getProfile(token, userId) {
+  const rows = await authedApi('yas_profiles?select=*&id=eq.' + userId, token);
+  return Array.isArray(rows) ? rows[0] || null : null;
+}
+
+export async function upsertProfile(token, profile) {
+  return authedApi('yas_profiles', token, {
+    method: 'POST',
+    headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
+    body: [profile],
   });
 }

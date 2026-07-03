@@ -1,47 +1,12 @@
-import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Routes, Route, Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { FALLBACKS, CONTACT } from './content.js';
+import { CONTACT } from './content.js';
 import { COLLECTION } from './collection.js';
-import { loadSiteContent, loadJobs, loadBrands, submitLead } from './supa.js';
-
-/* ────────────────────────────────────────────────────────────────────────
-   i18n + Hub-managed content
-   ──────────────────────────────────────────────────────────────────────── */
-const I18n = createContext(null);
-const useI18n = () => useContext(I18n);
-
-function I18nProvider({ children }) {
-  const [lang, setLang] = useState(() => {
-    try { return localStorage.getItem('yas_lang') || 'en'; } catch { return 'en'; }
-  });
-  const [managed, setManaged] = useState({}); // { key: {en, ar} } from Supabase
-
-  // Load Hub-managed content once; merge over fallbacks at read time.
-  useEffect(() => {
-    let alive = true;
-    loadSiteContent().then((m) => { if (alive) setManaged(m || {}); }).catch(() => {});
-    return () => { alive = false; };
-  }, []);
-
-  // Reflect language on <html> for RTL + font switching.
-  useEffect(() => {
-    try { localStorage.setItem('yas_lang', lang); } catch {}
-    const el = document.documentElement;
-    el.setAttribute('lang', lang);
-    el.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-  }, [lang]);
-
-  const t = useMemo(() => (key) => {
-    const m = managed[key];
-    if (m && m[lang]) return m[lang];
-    const f = FALLBACKS[key];
-    if (f && f[lang]) return f[lang];
-    return f ? (f.en || key) : key;
-  }, [managed, lang]);
-
-  const value = useMemo(() => ({ lang, setLang, t, dir: lang === 'ar' ? 'rtl' : 'ltr' }), [lang, t]);
-  return <I18n.Provider value={value}>{children}</I18n.Provider>;
-}
+import { loadJobs, loadBrands, submitLead } from './supa.js';
+import { I18nProvider, useI18n } from './i18n.jsx';
+import { AuthProvider } from './auth.jsx';
+import { CartProvider } from './cart.jsx';
+import { Shop, ProductDetail, CartPage, Checkout, Account, CartLink } from './shop.jsx';
 
 /* ── Scroll reveal ──────────────────────────────────────────────────────── */
 function useReveal() {
@@ -117,6 +82,7 @@ function Header() {
             )}
           </div>
           <NavLink to="/collection" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.collection')}</NavLink>
+          <NavLink to="/shop" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.shop')}</NavLink>
           <NavLink to="/quality" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.quality')}</NavLink>
           <NavLink to="/careers" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.careers')}</NavLink>
           <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''}>{t('nav.contact')}</NavLink>
@@ -126,7 +92,10 @@ function Header() {
           <button className="langtoggle" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} aria-label="Toggle language">
             {lang === 'en' ? 'العربية' : 'English'}
           </button>
-          <Link to="/contact" className="btn btn-dark" style={{ padding: '10px 20px' }}>{t('cta.contact')}</Link>
+          <Link to="/account" aria-label={t('nav.account')} title={t('nav.account')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 42, height: 42, borderRadius: 999, border: '1px solid var(--line)' }}>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+          </Link>
+          <CartLink />
           <button className="burger" aria-label="Menu" onClick={() => setOpen((v) => !v)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
           </button>
@@ -139,9 +108,12 @@ function Header() {
         <Link to="/brands/the-closets-international">{t('closets.hero.title')}</Link>
         <Link to="/brands/fittings-house">{t('fittings.hero.title')}</Link>
         <Link to="/collection">{t('nav.collection')}</Link>
+        <Link to="/shop">{t('nav.shop')}</Link>
         <Link to="/quality">{t('nav.quality')}</Link>
         <Link to="/careers">{t('nav.careers')}</Link>
         <Link to="/contact">{t('nav.contact')}</Link>
+        <Link to="/account">{t('nav.account')}</Link>
+        <Link to="/cart">{t('cart.title')}</Link>
       </div>
     </header>
   );
@@ -617,6 +589,10 @@ const TITLES = {
   '/quality': 'Quality & ISO 9001 — YAS Holding',
   '/collection': 'Collection 2023–2025 — YAS Holding',
   '/samples/collection2023-2025': 'Collection 2023–2025 — YAS Holding',
+  '/shop': 'Shop — YAS Wood',
+  '/cart': 'Cart — YAS Wood',
+  '/checkout': 'Checkout — YAS Wood',
+  '/account': 'Account — YAS Holding',
   '/careers': 'Careers — YAS Holding',
   '/contact': 'Contact — YAS Holding',
 };
@@ -633,24 +609,33 @@ function Chrome() {
 export default function App() {
   return (
     <I18nProvider>
-      <Chrome />
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+      <AuthProvider>
+        <CartProvider>
+          <Chrome />
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
           <Route path="/brands/yas-wood" element={<BrandPage prefix="ywood" glyph="Y" features={['f1', 'f2', 'f3']} />} />
           <Route path="/brands/the-closets-international" element={<BrandPage prefix="closets" glyph="C" ctaHref={CONTACT.closetsSite} ctaKey="closets.cta" />} />
           <Route path="/brands/fittings-house" element={<BrandPage prefix="fittings" glyph="F" features={['f1', 'f2', 'f3']} />} />
           <Route path="/quality" element={<Quality />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/samples/collection2023-2025" element={<Collection />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
+            </Routes>
+          </main>
+          <Footer />
+        </CartProvider>
+      </AuthProvider>
     </I18nProvider>
   );
 }
