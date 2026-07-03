@@ -17,6 +17,13 @@ const Hero = ({ eyebrow, title, sub }) => (
   </div></section>
 );
 const nm = (r, lang, base) => (lang === 'ar' ? (r[base + '_ar'] || r[base + '_en']) : (r[base + '_en'] || r[base + '_ar'])) || '';
+// Stock state: null stock = made-to-order (always available). Returns null or {out, label, color}.
+const stockOf = (p, t) => {
+  if (p.stock == null) return null;
+  if (p.stock <= 0) return { out: true, label: t('shop.outstock'), color: 'var(--danger, #9a2f26)' };
+  if (p.stock <= 5) return { out: false, label: t('shop.lowstock'), color: 'var(--brand-deep)' };
+  return { out: false, label: t('shop.instock'), color: '#276a3a' };
+};
 
 /* ── Header cart link (count badge) ───────────────────────────────────── */
 export function CartLink() {
@@ -79,13 +86,15 @@ export function Shop() {
                 </Link>
                 <div className="swatch-meta">
                   <div className="swatch-name serif">{nm(p, lang, 'name')}</div>
-                  <div className="swatch-code">{p.category}</div>
+                  <div className="swatch-code">{p.category}{(() => { const s = stockOf(p, t); return s ? <> · <span style={{ color: s.color, fontWeight: 600 }}>{s.label}</span></> : null; })()}</div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 10, gap: 8 }}>
                     <strong style={{ color: 'var(--espresso)' }}>{money(p.price, p.currency)}</strong>
-                    <button className="btn btn-gold" style={{ minHeight: 38, padding: '9px 14px', fontSize: 13 }}
-                      onClick={() => add({ key: 'p_' + p.id, kind: 'product', name: nm(p, lang, 'name'), price: p.price, currency: p.currency, image: p.image_url })}>
-                      {t('shop.add')}
-                    </button>
+                    {(() => { const s = stockOf(p, t); const out = s && s.out; return (
+                      <button className="btn btn-gold" disabled={out} style={{ minHeight: 38, padding: '9px 14px', fontSize: 13, opacity: out ? 0.5 : 1, cursor: out ? 'not-allowed' : 'pointer' }}
+                        onClick={() => !out && add({ key: 'p_' + p.id, kind: 'product', name: nm(p, lang, 'name'), price: p.price, currency: p.currency, image: p.image_url })}>
+                        {out ? t('shop.outstock') : t('shop.add')}
+                      </button>
+                    ); })()}
                   </div>
                 </div>
               </div>
@@ -139,18 +148,27 @@ export function ProductDetail() {
         <div className="rv">
           <span className="eyebrow">{p.category}</span>
           <h1 className="serif" style={{ fontSize: 'clamp(30px,4vw,44px)', color: 'var(--espresso)', margin: '12px 0 10px' }}>{nm(p, lang, 'name')}</h1>
-          <div style={{ fontSize: 24, fontWeight: 700, color: 'var(--brand-deep)', marginBottom: 16 }}>{money(p.price, p.currency)}</div>
-          <p className="lead" style={{ marginBottom: 24 }}>{nm(p, lang, 'description')}</p>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--line)', borderRadius: 12, overflow: 'hidden' }}>
-              <button onClick={() => setQty((q) => Math.max(1, q - 1))} style={qbtn}>−</button>
-              <span style={{ minWidth: 40, textAlign: 'center', fontWeight: 600 }}>{qty}</span>
-              <button onClick={() => setQty((q) => q + 1)} style={qbtn}>+</button>
-            </div>
-            <button className="btn btn-gold" onClick={() => { add({ key: 'p_' + p.id, kind: 'product', name: nm(p, lang, 'name'), price: p.price, currency: p.currency, image: p.image_url }, qty); nav('/cart'); }}>
-              {t('shop.add')} <Arrow />
-            </button>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, marginBottom: 16, flexWrap: 'wrap' }}>
+            <span style={{ fontSize: 24, fontWeight: 700, color: 'var(--brand-deep)' }}>{money(p.price, p.currency)}</span>
+            {(() => { const s = stockOf(p, t); return s ? <span style={{ fontSize: 14, fontWeight: 600, color: s.color }}>{s.label}</span> : null; })()}
           </div>
+          <p className="lead" style={{ marginBottom: 24 }}>{nm(p, lang, 'description')}</p>
+          {(() => {
+            const s = stockOf(p, t); const out = s && s.out;
+            return (
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--line)', borderRadius: 12, overflow: 'hidden', opacity: out ? 0.5 : 1 }}>
+                  <button onClick={() => setQty((q) => Math.max(1, q - 1))} style={qbtn} disabled={out}>−</button>
+                  <span style={{ minWidth: 40, textAlign: 'center', fontWeight: 600 }}>{qty}</span>
+                  <button onClick={() => setQty((q) => q + 1)} style={qbtn} disabled={out}>+</button>
+                </div>
+                <button className="btn btn-gold" disabled={out} style={{ opacity: out ? 0.5 : 1, cursor: out ? 'not-allowed' : 'pointer' }}
+                  onClick={() => { if (out) return; add({ key: 'p_' + p.id, kind: 'product', name: nm(p, lang, 'name'), price: p.price, currency: p.currency, image: p.image_url }, qty); nav('/cart'); }}>
+                  {out ? t('shop.outstock') : t('shop.add')} <Arrow />
+                </button>
+              </div>
+            );
+          })()}
           <Link to="/shop" style={{ display: 'inline-block', marginTop: 22, color: 'var(--brand-deep)', fontWeight: 600, fontSize: 14 }}>← {t('shop.back')}</Link>
         </div>
       </div>

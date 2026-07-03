@@ -88,13 +88,14 @@ export async function loadProducts() {
   return api('yas_products?select=*&active=eq.true&order=sort.asc,created_at.desc');
 }
 
-// Place an order/quote. Works for guests (anon) and logged-in customers (token).
+// Place an order/quote via the atomic RPC (inserts order + decrements product
+// stock server-side; user_id is taken from the token, not the payload).
 export async function placeOrder(order, token) {
-  return authedApi('yas_orders', token, {
+  const id = await authedApi('rpc/yas_place_order', token, {
     method: 'POST',
-    headers: { Prefer: 'return=representation' },
-    body: [order],
+    body: { p_order: order },
   });
+  return [{ id: typeof id === 'string' ? id : (id && id.id) || null }];
 }
 
 export async function loadMyOrders(token) {
