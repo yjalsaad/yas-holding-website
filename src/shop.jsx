@@ -114,7 +114,7 @@ export function Shop() {
                   <div className="swatch-name serif">{s.name}</div>
                   {s.code && <div className="swatch-code">{s.code}</div>}
                   <button className="btn btn-ghost" style={{ minHeight: 36, padding: '8px 12px', fontSize: 13, marginTop: 10, width: '100%' }}
-                    onClick={() => add({ key: 's_' + s.code || s.name, kind: 'sample', name: s.name + (s.code ? ' · ' + s.code : ''), code: s.code, price: 0, currency: 'BHD', image: s.img })}>
+                    onClick={() => add({ key: 's_' + (s.code || s.name), kind: 'sample', name: s.name + (s.code ? ' · ' + s.code : ''), code: s.code, price: 0, currency: 'BHD', image: s.img })}>
                     {t('shop.addSample')}
                   </button>
                 </div>
