@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Add your production domain here once it's set, e.g.
-     <url><loc>https://YOUR-DOMAIN/</loc></url> for each route
-     ( / /about /brands/yas-wood /brands/the-closets-international
-       /brands/fittings-house /quality /collection /shop /careers /contact ). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://yas-holding-website.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/brands/yas-wood</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/brands/the-closets-international</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/brands/fittings-house</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/quality</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/collection</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/shop</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/careers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://yas-holding-website.vercel.app/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
